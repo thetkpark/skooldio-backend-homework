@@ -1,5 +1,11 @@
 import { Card } from './card/Card'
 
+export enum CompareResult {
+	Win,
+	Lose,
+	Draw,
+}
+
 export class Hand {
 	public readonly cards: Card[]
 	public readonly score: number
@@ -17,7 +23,9 @@ export class Hand {
 		return this.cards.map(card => card.display).join(', ')
 	}
 
-	public isHigherThan(hand: Hand): boolean {
-		return this.score > hand.score
+	public compare(hand: Hand): CompareResult {
+		if (this.score > hand.score) return CompareResult.Win
+		if (this.score < hand.score) return CompareResult.Lose
+		return CompareResult.Draw
 	}
 }

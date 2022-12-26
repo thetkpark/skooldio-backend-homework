@@ -1,4 +1,4 @@
-import { Hand } from './Hand'
+import { CompareResult, Hand } from './Hand'
 import { FakerCardGenerator } from './card/faker'
 import { ReadlinePrompt } from './prompt/readline'
 import { Prompt } from './prompt/Prompt'
@@ -20,12 +20,18 @@ const play = (prompt: Prompt) => {
 		console.log(`You got ${userCard.display()}`)
 		console.log(`The dealer got ${dealerCard.display()}`)
 
-		if (userCard.isHigherThan(dealerCard)) {
-			console.log(`You won!!!, received ${bet} chips`)
-			chips += bet
-		} else {
-			console.log(`You lost, lost ${bet} chips`)
-			chips -= bet
+		switch (userCard.compare(dealerCard)) {
+			case CompareResult.Win:
+				console.log(`You won!!!, received ${bet} chips`)
+				chips += bet
+				break
+			case CompareResult.Lose:
+				console.log(`You lost, lost ${bet} chips`)
+				chips -= bet
+				break
+			default:
+				console.log('Draw, no chips changed')
+				break
 		}
 
 		isPlay = prompt.bool('Wanna play more?')
