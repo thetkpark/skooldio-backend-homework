@@ -1,11 +1,11 @@
-import { Card, CardGenerator } from './card/Card'
+import { Card } from './card/Card'
 
 export class Hand {
-	private cards: Card[]
-	private score: number
+	public readonly cards: Card[]
+	public readonly score: number
 
-	constructor(cardGenerator: CardGenerator) {
-		this.cards = [cardGenerator.generate(), cardGenerator.generate()]
+	constructor(card1: Card, card2: Card) {
+		this.cards = [card1, card2]
 		this.score = this.calculateScore()
 	}
 

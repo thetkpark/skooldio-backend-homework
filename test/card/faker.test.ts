@@ -1,12 +1,11 @@
 import { FakerCardGenerator } from '../../src/card/faker'
 
-let generator: FakerCardGenerator
-
-beforeAll(() => {
-	generator = new FakerCardGenerator()
-})
-
 describe('Faker Card Generator', () => {
+	let generator: FakerCardGenerator
+	beforeAll(() => {
+		generator = new FakerCardGenerator()
+	})
+
 	it('should generate a card', () => {
 		const card = generator.generate()
 		expect(card).toHaveProperty('suit')

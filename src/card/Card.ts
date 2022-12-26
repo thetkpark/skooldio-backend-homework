@@ -1,5 +1,12 @@
+export enum Suit {
+	Spades = 'Spades',
+	Hearts = 'Hearts',
+	Diamonds = 'Diamonds',
+	Clubs = 'Clubs',
+}
+
 export interface Card {
-	suit: string
+	suit: Suit
 	value: number
 	display: string
 }

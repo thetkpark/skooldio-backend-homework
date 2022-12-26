@@ -8,8 +8,8 @@ let chips = 0,
 
 while (isPlay) {
 	const fakerCardGenerator = new FakerCardGenerator()
-	const userCard = new Hand(fakerCardGenerator)
-	const dealerCard = new Hand(fakerCardGenerator)
+	const userCard = new Hand(fakerCardGenerator.generate(), fakerCardGenerator.generate())
+	const dealerCard = new Hand(fakerCardGenerator.generate(), fakerCardGenerator.generate())
 
 	console.log(`You got ${userCard.display()}`)
 	console.log(`The dealer got ${dealerCard.display()}`)

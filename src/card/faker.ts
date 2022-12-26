@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { Card, CardGenerator } from './Card'
+import { Card, CardGenerator, Suit } from './Card'
 
 export class FakerCardGenerator implements CardGenerator {
 	public generate(): Card {
@@ -18,7 +18,7 @@ export class FakerCardGenerator implements CardGenerator {
 			{ value: 0, display: 'Queen' },
 			{ value: 0, display: 'King' },
 		])
-		const suit = faker.helpers.arrayElement(['Clubs', 'Diamonds', 'Hearts', 'Spades'])
+		const suit = faker.helpers.arrayElement([Suit.Clubs, Suit.Diamonds, Suit.Hearts, Suit.Spades])
 		return { suit, value, display: `${suit}-${valueString}` }
 	}
 }
