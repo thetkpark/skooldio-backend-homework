@@ -13,6 +13,7 @@
   "author": "Sethanant Pipatpakorn",
   "license": "ISC",
   "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
     "@types/node": "^18.11.17",
     "@types/readline-sync": "^1.4.4",
     "@typescript-eslint/eslint-plugin": "^5.47.0",
