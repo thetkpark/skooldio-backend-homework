@@ -7,12 +7,12 @@ describe('Hand', () => {
 	describe('score calculation', () => {
 		it('should calcualte the score when the sum less then 10', () => {
 			const hand = new Hand(customMockCard(2, Suit.Clubs), customMockCard(0, Suit.Hearts))
-			expect(hand.score).toBe(2)
+			expect(hand.score).toEqual(2)
 		})
 
 		it('should calcualte the score when the sum more then 10', () => {
 			const hand = new Hand(customMockCard(9, Suit.Clubs), customMockCard(5, Suit.Hearts))
-			expect(hand.score).toBe(4)
+			expect(hand.score).toEqual(4)
 		})
 	})
 
@@ -24,6 +24,6 @@ describe('Hand', () => {
 
 	it('should display the cards', () => {
 		const hand = new Hand(customMockCard(4, Suit.Clubs), customMockCard(5, Suit.Hearts))
-		expect(hand.display()).toBe('Clubs-4, Hearts-5')
+		expect(hand.display()).toEqual('Clubs-4, Hearts-5')
 	})
 })
