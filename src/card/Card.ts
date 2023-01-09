@@ -12,5 +12,5 @@ export interface Card {
 }
 
 export interface CardGenerator {
-	generate: () => Card
+	draw: () => Card
 }

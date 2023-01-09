@@ -2,8 +2,10 @@ import { faker } from '@faker-js/faker'
 import { Card, CardGenerator, Suit } from './Card'
 
 export class FakerCardGenerator implements CardGenerator {
-	public generate(): Card {
-		const { value, display: valueString } = faker.helpers.arrayElement([
+	private cards: Card[]
+
+	constructor() {
+		const values = [
 			{ value: 1, display: 'Ace' },
 			{ value: 2, display: '2' },
 			{ value: 3, display: '3' },
@@ -17,8 +19,22 @@ export class FakerCardGenerator implements CardGenerator {
 			{ value: 0, display: 'Jack' },
 			{ value: 0, display: 'Queen' },
 			{ value: 0, display: 'King' },
-		])
-		const suit = faker.helpers.arrayElement([Suit.Clubs, Suit.Diamonds, Suit.Hearts, Suit.Spades])
-		return { suit, value, display: `${suit}-${valueString}` }
+		]
+		const suits = [Suit.Clubs, Suit.Diamonds, Suit.Hearts, Suit.Spades]
+		this.cards = []
+		for (const value of values) {
+			for (const suit of suits) {
+				this.cards.push({ suit, value: value.value, display: `${suit}-${value.display}` })
+			}
+		}
+		faker.helpers.shuffle(this.cards)
+	}
+
+	public draw(): Card {
+		return this.cards.shift() as Card
+	}
+
+	public length(): number {
+		return this.cards.length
 	}
 }

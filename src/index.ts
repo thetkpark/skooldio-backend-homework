@@ -8,16 +8,24 @@ const getChipsSummaryString = (chips: number): string => {
 }
 
 const play = (prompt: Prompt) => {
-	const bet: number = prompt.int('Please put your bet')
-	let chips = 0,
-		isPlay = true
+	let chips = 0
 
-	while (isPlay) {
+	// eslint-disable-next-line no-constant-condition
+	while (true) {
+		const bet: number = prompt.int('Please put your bet')
 		const fakerCardGenerator = new FakerCardGenerator()
-		const userCard = new Hand(fakerCardGenerator.generate(), fakerCardGenerator.generate())
-		const dealerCard = new Hand(fakerCardGenerator.generate(), fakerCardGenerator.generate())
+		const userCard = new Hand(fakerCardGenerator.draw(), fakerCardGenerator.draw())
+		const dealerCard = new Hand(fakerCardGenerator.draw(), fakerCardGenerator.draw())
 
 		console.log(`You got ${userCard.display()}`)
+		if (prompt.bool('Do you want to draw?')) {
+			userCard.addCard(fakerCardGenerator.draw())
+			console.log(`You got ${userCard.display()}`)
+		}
+
+		if (dealerCard.calculateScore() < 5) {
+			dealerCard.addCard(fakerCardGenerator.draw())
+		}
 		console.log(`The dealer got ${dealerCard.display()}`)
 
 		switch (userCard.compare(dealerCard)) {
@@ -33,9 +41,8 @@ const play = (prompt: Prompt) => {
 				console.log('Draw, no chips changed')
 				break
 		}
-
-		isPlay = prompt.bool('Wanna play more?')
-		if (!isPlay) console.log(getChipsSummaryString(chips))
+		console.log(getChipsSummaryString(chips))
+		if (!prompt.bool('Wanna play more?')) break
 	}
 }
 
